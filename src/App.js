@@ -7,10 +7,10 @@ import JoinBlock from "./components/JoinBlock";
 import Chat from "./components/Chat";
 import reducer from './reducers/reducer';
 
-const App = () => {
+const App = ({match}) => {
     const [state, dispatch] = useReducer(reducer, {
         joined: false,
-        roomId: '8as7522e6b',
+        roomId: match.params.id || randomId(10, 'a0'),
         userName: null,
         users: [],
         messages: []

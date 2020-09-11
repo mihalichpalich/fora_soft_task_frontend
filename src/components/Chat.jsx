@@ -25,12 +25,17 @@ const Chat = ({users, messages, userName, roomId, onAddMessage}) => {
     return (
         <div className="chat">
             <div className="chat-users">
-                Room: <b>{roomId}</b>
+                RoomID: <b>{roomId}</b>
                 <hr/>
                 <b>Online:</b>
+
                 <ul>
                     {users.map((name, index) => <li key={name + index}>{name}</li>)}
                 </ul>
+
+                <p className="chat-users-invitation-link">
+                    The link for invitation: <span style={{fontSize: 11}}>{window.location.href}</span>
+                </p>
             </div>
 
             <div className="chat-messages">

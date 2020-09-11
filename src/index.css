@@ -47,10 +47,16 @@
 }
 
 .chat-users {
-  border-right: 1px solid rgba(159, 183, 197, 0.1);
+  display: flex;
+  flex-direction: column;
   padding: 20px;
   width: 200px;
+  border-right: 1px solid rgba(159, 183, 197, 0.1);
   background-color: #f6f9fa;
+}
+
+.chat-users-invitation-link {
+  margin-top: 50px;
 }
 
 .chat-messages {
