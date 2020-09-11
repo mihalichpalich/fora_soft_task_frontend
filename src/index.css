@@ -77,6 +77,21 @@
   margin-bottom: 20px;
 }
 
+.message-is-me {
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.message-is-me p {
+  display: inline-flex;
+  border-radius: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: green;
+  padding: 10px 15px 15px;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
 .message p {
   display: inline-flex;
   border-radius: 10px;

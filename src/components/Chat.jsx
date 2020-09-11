@@ -41,7 +41,10 @@ const Chat = ({users, messages, userName, roomId, onAddMessage}) => {
             <div className="chat-messages">
                 <div ref={messagesRef} className="messages">
                     {messages.map((message, index) => (
-                        <div key={message.userName + index} className="message">
+                        <div
+                            key={message.userName + index}
+                            className={(message.userName === userName) ? "message-is-me" : "message"}
+                        >
                             <p>{message.text}</p>
 
                             <div>
