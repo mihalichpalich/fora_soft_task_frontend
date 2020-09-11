@@ -27,6 +27,12 @@ export default (state, action) => {
                 messages: [...state.messages, action.payload]
             };
 
+        case 'UNJOINED':
+            return {
+                ...state,
+                joined: false
+            };
+
         default:
             return state
     }

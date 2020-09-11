@@ -1,16 +1,16 @@
 import React, {useEffect, useReducer} from 'react';
+import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
+
 import socket from './core/socket';
 import axios from './core/axios';
-import randomId from 'random-id';
-
 import JoinBlock from "./components/JoinBlock";
 import Chat from "./components/Chat";
 import reducer from './reducers/reducer';
 
-const App = ({match}) => {
+const App = () => {
     const [state, dispatch] = useReducer(reducer, {
         joined: false,
-        roomId: match.params.id || randomId(10, 'a0'),
+        roomId: null,
         userName: null,
         users: [],
         messages: []
@@ -44,6 +44,12 @@ const App = ({match}) => {
         })
     };
 
+    const unjoin = () => {
+        dispatch({
+            type: 'UNJOINED'
+        })
+    };
+
     useEffect(() => {
         socket.on('ROOM:SET_USERS', setUsers);
         socket.on('ROOM:NEW_MESSAGE', addMessage);
@@ -51,9 +57,19 @@ const App = ({match}) => {
 
     return (
         <div className="wrapper">
-            {!state.joined
-                ? <JoinBlock roomId={state.roomId} onLogin={onLogin}/>
-                : <Chat {...state} onAddMessage={addMessage}/>}
+            <Router>
+                <Switch>
+                    <Route exact path="/" component={({match}) => <JoinBlock onLogin={onLogin} match={match}/>}/>
+                    <Route
+                        path="/dialog/:id"
+                        render={({match}) => (
+                            !state.joined
+                                ? <JoinBlock onLogin={onLogin} match={match}/>
+                                : <Chat {...state} onAddMessage={addMessage} onUnjoin={unjoin}/>
+                        )}
+                    />
+                </Switch>
+            </Router>
         </div>
     );
 };

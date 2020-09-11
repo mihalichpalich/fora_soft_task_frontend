@@ -1,9 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
+import {withRouter} from 'react-router-dom';
 import dayjs from "dayjs";
 
 import socket from '../core/socket';
 
-const Chat = ({users, messages, userName, roomId, onAddMessage}) => {
+const Chat = ({users, messages, userName, roomId, onAddMessage, history, onUnjoin}) => {
     const [messageValue, setMessageValue] = useState('');
     const messagesRef = useRef(null);
 
@@ -22,13 +23,25 @@ const Chat = ({users, messages, userName, roomId, onAddMessage}) => {
         messagesRef.current.scrollTo(0, 99999)
     }, [messages]);
 
+    const backPath = (path) => {
+        onUnjoin();
+        socket.disconnect();
+        history.push(path)
+    };
+
     return (
         <div className="chat">
             <div className="chat-users">
                 RoomID: <b>{roomId}</b>
                 <hr/>
-                <b>Online:</b>
 
+                <button
+                    type="button"
+                    className="btn btn-secondary chat-go-back"
+                    onClick={() => backPath(`/dialog/${roomId}`)}
+                >Back</button>
+
+                <b>Online:</b>
                 <ul>
                     {users.map((name, index) => <li key={name + index}>{name}</li>)}
                 </ul>
@@ -68,4 +81,4 @@ const Chat = ({users, messages, userName, roomId, onAddMessage}) => {
     );
 };
 
-export default Chat;
+export default withRouter(Chat);

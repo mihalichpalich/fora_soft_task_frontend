@@ -50,7 +50,8 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  width: 200px;
+  width: 33%;
+  overflow: auto;
   border-right: 1px solid rgba(159, 183, 197, 0.1);
   background-color: #f6f9fa;
 }
@@ -135,4 +136,8 @@
 .chat-messages form textarea {
   width: 100%;
   margin-bottom: 10px;
+}
+
+.chat-go-back {
+  margin-bottom: 20px;
 }

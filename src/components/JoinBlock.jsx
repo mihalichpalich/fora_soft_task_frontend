@@ -1,21 +1,26 @@
 import React, {useEffect, useState} from 'react';
-import axios from '../core/axios';
+import {withRouter} from 'react-router-dom';
+import randomId from 'random-id';
 
-const JoinBlock = ({roomId, onLogin}) => {
+import axios from '../core/axios';
+import socket from "../core/socket";
+
+const JoinBlock = ({match, onLogin, history}) => {
+    const [roomId, setRoomId] = useState(match.params.id);
     const [userName, setUserName] = useState('');
     const [warning, setWarning] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [wrongRoomIdWarning, setWrongRoomIdWarning] = useState(false);
 
-    console.log(typeof roomId, roomId);
-
     useEffect(() => {
-        const roomIdRegEx = /(?=.*[0-9])(?=.*[a-z])[0-9a-z]{10}/g;
-
-        if (roomId.match('(?=.*[0-9])(?=.*[a-z])[0-9a-z]{10}') === null) {
-            setWrongRoomIdWarning(true)
+        if (!roomId) {
+            setRoomId(randomId(10, 'a0'));
+        } else {
+            if (roomId.match('(?=.*[0-9])(?=.*[a-z])[0-9a-z]{10}') === null) {
+                setWrongRoomIdWarning(true)
+            }
         }
-    }, []);
+    }, [roomId]);
 
     const onEnter = async () => {
         const dataObj = {
@@ -26,11 +31,14 @@ const JoinBlock = ({roomId, onLogin}) => {
         if (userName) {
             setIsLoading(true);
             await axios.post('/rooms', dataObj);
+            socket.connect();
             onLogin(dataObj);
             setWarning(false)
         } else {
             setWarning(true)
         }
+
+        history.push(`/dialog/${roomId}`)
     };
 
     return (
@@ -56,4 +64,4 @@ const JoinBlock = ({roomId, onLogin}) => {
     );
 };
 
-export default JoinBlock;
+export default withRouter(JoinBlock);
