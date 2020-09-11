@@ -6,13 +6,11 @@ import './index.css';
 import App from './App';
 
 ReactDOM.render(
-    <React.StrictMode>
-        <Router>
-            <Route exact path="/">
-                <Redirect to="/index"/>
-            </Route>
-            <Route path={["/index", "/:id"]} component={App}/>
-        </Router>
-    </React.StrictMode>,
+    <Router>
+        <Route exact path="/">
+            <Redirect to="/index"/>
+        </Route>
+        <Route path={["/index", "/:id"]} component={App}/>
+    </Router>,
     document.getElementById('root')
 );
