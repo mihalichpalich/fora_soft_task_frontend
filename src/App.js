@@ -1,5 +1,5 @@
 import React, {useEffect, useReducer} from 'react';
-import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import socket from './core/socket';
 import axios from './core/axios';
@@ -38,10 +38,12 @@ const App = () => {
     };
 
     const addMessage = (message) => {
-        dispatch({
-            type: 'NEW_MESSAGE',
-            payload: message
-        })
+        if (message.text) {
+            dispatch({
+                type: 'NEW_MESSAGE',
+                payload: message
+            })
+        }
     };
 
     const unjoin = () => {

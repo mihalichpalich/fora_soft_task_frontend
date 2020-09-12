@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import dayjs from "dayjs";
 
 import socket from '../core/socket';
@@ -23,10 +23,16 @@ const Chat = ({users, messages, userName, roomId, onAddMessage, history, onUnjoi
         messagesRef.current.scrollTo(0, 99999)
     }, [messages]);
 
-    const backPath = (path) => {
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            onSendMessage()
+        }
+    };
+
+    const backPath = () => {
         onUnjoin();
         socket.disconnect();
-        history.push(path)
     };
 
     return (
@@ -35,11 +41,9 @@ const Chat = ({users, messages, userName, roomId, onAddMessage, history, onUnjoi
                 RoomID: <b>{roomId}</b>
                 <hr/>
 
-                <button
-                    type="button"
-                    className="btn btn-secondary chat-go-back"
-                    onClick={() => backPath(`/dialog/${roomId}`)}
-                >Back</button>
+                <Link onClick={() => backPath()} to={`/dialog/${roomId}`}>
+                    <button type="button" className="btn btn-secondary chat-go-back">Back</button>
+                </Link>
 
                 <b>Online:</b>
                 <ul>
@@ -72,6 +76,7 @@ const Chat = ({users, messages, userName, roomId, onAddMessage, history, onUnjoi
                     <textarea
                         value={messageValue}
                         onChange={e => setMessageValue(e.target.value)}
+                        onKeyPress={handleKeyPress}
                         className="form-control"
                         rows="3" />
                     <button type="button" className="btn btn-primary" onClick={onSendMessage}>Send</button>
@@ -81,4 +86,4 @@ const Chat = ({users, messages, userName, roomId, onAddMessage, history, onUnjoi
     );
 };
 
-export default withRouter(Chat);
+export default Chat;

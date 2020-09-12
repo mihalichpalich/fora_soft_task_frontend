@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import randomId from 'random-id';
 
 import axios from '../core/axios';
 import socket from "../core/socket";
 
-const JoinBlock = ({match, onLogin, history}) => {
+const JoinBlock = ({match, onLogin}) => {
     const [roomId, setRoomId] = useState(match.params.id);
     const [userName, setUserName] = useState('');
-    const [warning, setWarning] = useState(false);
+    const [nameWarning, setNameWarning] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [wrongRoomIdWarning, setWrongRoomIdWarning] = useState(false);
 
@@ -33,12 +33,10 @@ const JoinBlock = ({match, onLogin, history}) => {
             await axios.post('/rooms', dataObj);
             socket.connect();
             onLogin(dataObj);
-            setWarning(false)
+            setNameWarning(false)
         } else {
-            setWarning(true)
+            setNameWarning(true)
         }
-
-        history.push(`/dialog/${roomId}`)
     };
 
     return (
@@ -48,15 +46,15 @@ const JoinBlock = ({match, onLogin, history}) => {
                 : (
                     <>
                         <input type="text" placeholder="Your name" value={userName} onChange={e => setUserName(e.target.value.trim())}/>
-                        <button
-                            className="btn btn-success"
-                            disabled={isLoading}
-                            onClick={onEnter}
-                        >
-                            {isLoading ? 'Loading...' : 'ENTER'}
-                        </button>
+
+                        <Link onClick={onEnter} to={`/dialog/${roomId}`}>
+                            <button className="btn btn-success" disabled={isLoading}>
+                                {isLoading ? 'Loading...' : 'ENTER'}
+                            </button>
+                        </Link>
+
                         <p>Your room ID is: {roomId}</p>
-                        {warning ? <p className="text-danger">Username is required!</p> : null}
+                        {nameWarning ? <p className="text-danger">Username is required!</p> : null}
                     </>
                 )
             }
@@ -64,4 +62,4 @@ const JoinBlock = ({match, onLogin, history}) => {
     );
 };
 
-export default withRouter(JoinBlock);
+export default JoinBlock;
