@@ -3,9 +3,10 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import socket from './core/socket';
 import axios from './core/axios';
-import JoinBlock from "./components/JoinBlock";
-import Chat from "./components/Chat";
+import JoinBlock from "./pages/JoinBlock/JoinBlock";
+import Chat from "./pages/Chat/Chat";
 import reducer from './reducers/reducer';
+import './App.scss';
 
 const App = () => {
     const [state, dispatch] = useReducer(reducer, {

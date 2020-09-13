@@ -1,0 +1,30 @@
+.message {
+    margin-bottom: 20px;
+
+    p {
+        display: inline-flex;
+        border-radius: 10px;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        background-color: #7160ff;
+        padding: 10px 15px 15px;
+        color: #fff;
+        margin-bottom: 2px;
+    }
+
+    &-is-me {
+        text-align: right;
+
+        p {
+            background-color: green;
+        }
+    }
+
+    span {
+         opacity: 0.5;
+         font-size: 14px;
+    }
+
+    &-username {
+        margin-right: 10px;
+    }
+}

@@ -1,0 +1,32 @@
+.chat-users {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 33%;
+  overflow: auto;
+  border-right: 1px solid rgba(159, 183, 197, 0.1);
+  background-color: #f6f9fa;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  ul li {
+    margin-top: 10px;
+    border-radius: 3px;
+    background-color: #fff;
+    padding: 8px 14px;
+    box-shadow: 0 3px 5px rgba(159, 183, 197, 0.1);
+    font-weight: 500;
+  }
+}
+
+.chat-users-invitation-link {
+  margin-top: 50px;
+}
+
+.chat-go-back {
+  margin-bottom: 20px;
+}

@@ -2,8 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import randomId from 'random-id';
 
-import axios from '../core/axios';
-import socket from "../core/socket";
+import axios from '../../core/axios';
+import socket from "../../core/socket";
+import './JoinBlock.scss';
 
 const JoinBlock = ({match, onLogin}) => {
     const [roomId, setRoomId] = useState(match.params.id);
