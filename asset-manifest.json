@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/fora_soft_task_frontend/static/css/main.72994cf6.chunk.css",
-    "main.js": "/fora_soft_task_frontend/static/js/main.4db64eda.chunk.js",
-    "main.js.map": "/fora_soft_task_frontend/static/js/main.4db64eda.chunk.js.map",
+    "main.js": "/fora_soft_task_frontend/static/js/main.3ed0fb20.chunk.js",
+    "main.js.map": "/fora_soft_task_frontend/static/js/main.3ed0fb20.chunk.js.map",
     "runtime-main.js": "/fora_soft_task_frontend/static/js/runtime-main.dc250800.js",
     "runtime-main.js.map": "/fora_soft_task_frontend/static/js/runtime-main.dc250800.js.map",
     "static/js/2.69db739a.chunk.js": "/fora_soft_task_frontend/static/js/2.69db739a.chunk.js",
     "static/js/2.69db739a.chunk.js.map": "/fora_soft_task_frontend/static/js/2.69db739a.chunk.js.map",
     "index.html": "/fora_soft_task_frontend/index.html",
-    "precache-manifest.bf5d427b361f442d0e7125ae4b54223b.js": "/fora_soft_task_frontend/precache-manifest.bf5d427b361f442d0e7125ae4b54223b.js",
+    "precache-manifest.0f9e061b9ef5ab574e55d48691a0a095.js": "/fora_soft_task_frontend/precache-manifest.0f9e061b9ef5ab574e55d48691a0a095.js",
     "service-worker.js": "/fora_soft_task_frontend/service-worker.js",
     "static/css/main.72994cf6.chunk.css.map": "/fora_soft_task_frontend/static/css/main.72994cf6.chunk.css.map",
     "static/js/2.69db739a.chunk.js.LICENSE.txt": "/fora_soft_task_frontend/static/js/2.69db739a.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.dc250800.js",
     "static/js/2.69db739a.chunk.js",
     "static/css/main.72994cf6.chunk.css",
-    "static/js/main.4db64eda.chunk.js"
+    "static/js/main.3ed0fb20.chunk.js"
   ]
 }

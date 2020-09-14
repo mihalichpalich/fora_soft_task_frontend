@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/fora_soft_task_frontend/precache-manifest.bf5d427b361f442d0e7125ae4b54223b.js"
+  "/fora_soft_task_frontend/precache-manifest.0f9e061b9ef5ab574e55d48691a0a095.js"
 );
 
 self.addEventListener('message', (event) => {
