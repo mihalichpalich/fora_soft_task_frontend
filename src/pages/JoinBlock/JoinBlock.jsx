@@ -1,10 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import randomId from 'random-id';
+import PropTypes from 'prop-types';
 
 import axios from '../../core/axios';
 import socket from "../../core/socket";
 import './JoinBlock.scss';
+
+/**
+ * Component for logging in to the chat
+ * @param {object} match Object with query params
+ * @param {func} onLogin Function for logging in into the room and load users and messages
+ * @component
+ */
 
 const JoinBlock = ({match, onLogin}) => {
     const [roomId, setRoomId] = useState(match.params.id);
@@ -12,6 +20,11 @@ const JoinBlock = ({match, onLogin}) => {
     const [nameWarning, setNameWarning] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [wrongRoomIdWarning, setWrongRoomIdWarning] = useState(false);
+
+    /**
+     * Set the roomID unless it's not inside the query
+     * If it is, check if it consists of 10 symbols - lowercase letters and numbers
+     */
 
     useEffect(() => {
         if (!roomId) {
@@ -23,20 +36,24 @@ const JoinBlock = ({match, onLogin}) => {
         }
     }, [roomId]);
 
+    /**
+     * Function to check the username, create the room in the server and send the users data
+     */
+
     const onEnter = async () => {
         const dataObj = {
             roomId,
             userName
         };
 
-        if (userName) {
+        if (!userName) {
+            setNameWarning(true)
+        } else {
             setIsLoading(true);
             await axios.post('/rooms', dataObj);
             socket.connect();
             onLogin(dataObj);
             setNameWarning(false)
-        } else {
-            setNameWarning(true)
         }
     };
 
@@ -48,8 +65,8 @@ const JoinBlock = ({match, onLogin}) => {
                     <>
                         <input type="text" placeholder="Your name" value={userName} onChange={e => setUserName(e.target.value.trim())}/>
 
-                        <Link onClick={onEnter} to={`/dialog/${roomId}`}>
-                            <button className="btn btn-success" disabled={isLoading}>
+                        <Link to={`/dialog/${roomId}`}>
+                            <button className="btn btn-success" onClick={onEnter} disabled={isLoading}>
                                 {isLoading ? 'Loading...' : 'ENTER'}
                             </button>
                         </Link>
@@ -61,6 +78,11 @@ const JoinBlock = ({match, onLogin}) => {
             }
         </div>
     );
+};
+
+JoinBlock.propTypes = {
+    match: PropTypes.object.isRequired,
+    onLogin: PropTypes.func.isRequired
 };
 
 export default JoinBlock;

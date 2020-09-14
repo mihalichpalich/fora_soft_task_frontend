@@ -4,9 +4,21 @@ import dayjs from "dayjs";
 import './MessageForm.scss';
 import socket from "../../../core/socket";
 
+/**
+ * Component for messages sending
+ * @param {string} userName
+ * @param {string} roomId
+ * @param {func} onAddMessage
+ * @component
+ */
+
 const MessageForm = ({userName, roomId, onAddMessage}) => {
     const [messageValue, setMessageValue] = useState('');
 
+    /**
+     * Send message after key pressing
+     * @param {object} e the handler object
+     */
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -14,6 +26,9 @@ const MessageForm = ({userName, roomId, onAddMessage}) => {
         }
     };
 
+    /**
+     * Function for sending a message by sockets and dispatching it to the state
+     */
     const onSendMessage = () => {
         socket.emit('ROOM:NEW_MESSAGE', {
             userName,

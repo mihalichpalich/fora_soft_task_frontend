@@ -3,6 +3,14 @@ import {Link} from "react-router-dom";
 
 import './ChatUsers.scss';
 
+/**
+ * Component with the list of users in the room, logging out button and the invitation link
+ * @param roomId
+ * @param onGoBack Function for logging out and disconnecting from the room
+ * @param users
+ * @component
+ */
+
 const ChatUsers = ({roomId, onGoBack, users}) => {
     return (
         <div className="chat-users">
@@ -19,7 +27,9 @@ const ChatUsers = ({roomId, onGoBack, users}) => {
             </ul>
 
             <p className="chat-users-invitation-link">
-                The link for invitation: <span style={{fontSize: 11}}>{window.location.href}</span>
+                The link for invitation: <a
+                                            href={window.location.href}
+                                            style={{fontSize: 11}}>{window.location.href}</a>
             </p>
         </div>
     );

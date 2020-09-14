@@ -1,5 +1,5 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:3001';
+axios.defaults.baseURL = process.env.SERVER_DEV_URL;
 
 export default axios
