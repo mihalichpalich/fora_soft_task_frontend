@@ -34,4 +34,4 @@ Download the repository:
 
 Install and run:
 
-### `fora_soft_task_frontend`
+### `cd fora_soft_task_frontend && npm i && npm start`
